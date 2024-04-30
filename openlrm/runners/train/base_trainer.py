@@ -100,10 +100,12 @@ class Trainer(Runner):
 
     def __enter__(self):
         self.accelerator.init_trackers(
-            project_name=f"{self.cfg.experiment.parent}/{self.cfg.experiment.child}",
+            project_name="OpenLRM",
+            config=OmegaConf.to_container(self.cfg, resolve=True),
+            init_kwargs={"wandb": {"name": f"{self.cfg.experiment.parent}/{self.cfg.experiment.child}"}},
         )
         self.prepare_everything()
-        self.log_inital_info()
+        # self.log_inital_info()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):

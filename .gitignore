@@ -50,3 +50,7 @@ Thumbs.db
 *.swp
 *.swo
 *.~*
+
+exps/
+pretrained/
+wandb/
