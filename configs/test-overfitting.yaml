@@ -23,10 +23,10 @@ dataset:
     subsets:
         -   name: objaverse
             root_dirs:
-                - ../renderings-objaverse-chairs-32
+                - ../renderings-objaverse-chairs
             meta_path:
-                train: ../renderings-objaverse-chairs-32/train-1.json
-                val: ../renderings-objaverse-chairs-32/val-1.json
+                train: ../renderings-objaverse-chairs/train-1.json
+                val: ../renderings-objaverse-chairs/val-1.json
             sample_rate: 1.0
     sample_side_views: 3
     source_image_res: 224
@@ -62,7 +62,7 @@ train:
     debug_global_steps: null
 
 val:
-    batch_size: 4
+    batch_size: 1
     global_step_period: 100
     debug_batches: null
 

@@ -3,7 +3,7 @@ experiment:
     type: lrm
     seed: 42
     parent: train-class
-    child: objaverse-chairs-430-noaug-nosideviews
+    child: objaverse-chairs-430
 
 model:
     camera_embed_dim: 1024
@@ -23,17 +23,17 @@ dataset:
     subsets:
         -   name: objaverse
             root_dirs:
-                - ../renderings-objaverse-chairs-32
+                - ../renderings-objaverse-chairs
             meta_path:
-                train: ../renderings-objaverse-chairs-32/train-430.json
-                val: ../renderings-objaverse-chairs-32/val-430.json
+                train: ../renderings-objaverse-chairs/train-430.json
+                val: ../renderings-objaverse-chairs/val-430.json
             sample_rate: 1.0
-    sample_side_views: 0
+    sample_side_views: 3
     source_image_res: 224
     render_image:
-        low: 224
-        high: 224
-        region: 224
+        low: 64
+        high: 192
+        region: 64
     normalize_camera: true
     normed_dist_to_center: auto
     num_train_workers: 4
