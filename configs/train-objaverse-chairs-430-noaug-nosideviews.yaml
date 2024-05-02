@@ -2,8 +2,8 @@
 experiment:
     type: lrm
     seed: 42
-    parent: test
-    child: overfitting-nosideviews
+    parent: train-class
+    child: objaverse-chairs-430-noaug-nosideviews
 
 model:
     camera_embed_dim: 1024
@@ -25,15 +25,15 @@ dataset:
             root_dirs:
                 - ../renderings-objaverse-chairs-32
             meta_path:
-                train: ../renderings-objaverse-chairs-32/train-1.json
-                val: ../renderings-objaverse-chairs-32/val-1.json
+                train: ../renderings-objaverse-chairs-32/train-430.json
+                val: ../renderings-objaverse-chairs-32/val-430.json
             sample_rate: 1.0
     sample_side_views: 0
     source_image_res: 224
     render_image:
-        low: 64
-        high: 192
-        region: 64
+        low: 224
+        high: 224
+        region: 224
     normalize_camera: true
     normed_dist_to_center: auto
     num_train_workers: 4
@@ -48,7 +48,7 @@ train:
         perceptual_weight: 1.0
         tv_weight: 5e-4
     optim:
-        lr: 4e-5
+        lr: 4e-4
         weight_decay: 0.05
         beta1: 0.9
         beta2: 0.95
@@ -56,9 +56,9 @@ train:
     scheduler:
         type: cosine
         warmup_real_iters: 3000
-    batch_size: 1
+    batch_size: 15
     accum_steps: 1
-    epochs: 250000
+    epochs: 100000
     debug_global_steps: null
 
 val:
