@@ -54,4 +54,5 @@ Thumbs.db
 # Project-specific
 dumps/
 exps/
+pretrained/
 wandb/

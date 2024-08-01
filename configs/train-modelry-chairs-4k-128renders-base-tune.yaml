@@ -1,0 +1,91 @@
+
+experiment:
+    type: lrm
+    seed: 42
+    parent: train-class
+    child: modelry-chairs-4k-128renders-base-tune
+
+model:
+    camera_embed_dim: 1024
+    rendering_samples_per_ray: 96
+    transformer_dim: 768
+    transformer_layers: 12
+    transformer_heads: 12
+    triplane_low_res: 32
+    triplane_high_res: 64
+    triplane_dim: 48
+    encoder_type: dinov2
+    encoder_model_name: dinov2_vitb14_reg
+    encoder_feat_dim: 768
+    encoder_freeze: false
+
+dataset:
+    subsets:
+        -   name: objaverse
+            root_dirs:
+                - /home/4KChairs_128renders
+            meta_path:
+                train: /home/4KChairs_128renders/train_updated.json
+                val: /home/4KChairs_128renders/val_updated.json
+            sample_rate: 1.0
+    sample_side_views: 3
+    source_image_res: 336
+    render_image:
+        low: 96
+        high: 288
+        region: 96
+    normalize_camera: true
+    normed_dist_to_center: auto
+    num_train_workers: 4
+    num_val_workers: 2
+    pin_mem: true
+
+train:
+    mixed_precision: bf16
+    find_unused_parameters: false
+    loss:
+        pixel_weight: 1.0
+        perceptual_weight: 1.0
+        tv_weight: 5e-4
+    optim:
+        lr: 4e-5
+        weight_decay: 0.05
+        beta1: 0.9
+        beta2: 0.95
+        clip_grad_norm: 1.0
+    scheduler:
+        type: cosine
+        warmup_real_iters: 3000
+    batch_size: 8
+    accum_steps: 1
+    epochs: 500
+    debug_global_steps: null
+
+val:
+    batch_size: 4
+    global_step_period: 100
+    debug_batches: null
+
+saver:
+    auto_resume: true
+    load_model: pretrained/openlrm-mix-base-1.1/model.safetensors
+    checkpoint_root: ./exps/checkpoints
+    checkpoint_global_steps: 100
+    checkpoint_keep_level: 5
+
+logger:
+    stream_level: WARNING
+    log_level: INFO
+    log_root: ./exps/logs
+    tracker_root: ./exps/trackers
+    enable_profiler: false
+    trackers:
+        - wandb
+    image_monitor:
+        train_global_steps: 100
+        samples_per_log: 4
+
+compile:
+    suppress_errors: true
+    print_specializations: true
+    disable: true
