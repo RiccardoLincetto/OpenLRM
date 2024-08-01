@@ -105,7 +105,7 @@ class Trainer(Runner):
             init_kwargs={"wandb": {"name": f"{self.cfg.experiment.parent}/{self.cfg.experiment.child}"}},
         )
         self.prepare_everything()
-        # self.log_inital_info()
+        self.log_inital_info()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -245,7 +245,7 @@ class Trainer(Runner):
         ckpt_period = self.cfg.saver.checkpoint_global_steps
         logger.debug(f"Checkpoint base: {ckpt_base}")
         logger.debug(f"Checkpoint period: {ckpt_period}")
-        cur_order = ckpt_base ** math.floor(math.log(max_ckpt // ckpt_period, ckpt_base))
+        cur_order = ckpt_base ** math.floor(math.log(max(1, max_ckpt // ckpt_period), ckpt_base))  # max(1, ...) to avoid log(0)
         cur_idx = 0
         while cur_order > 0:
             cur_digit = max_ckpt // ckpt_period // cur_order % ckpt_base

@@ -116,6 +116,7 @@ class LRMTrainer(Trainer):
             source_image_res=cfg.dataset.source_image_res,
             normalize_camera=cfg.dataset.normalize_camera,
             normed_dist_to_center=cfg.dataset.normed_dist_to_center,
+            num_all_views=cfg.dataset.num_all_views,
         )
         val_dataset = MixerDataset(
             split="val",
@@ -127,6 +128,7 @@ class LRMTrainer(Trainer):
             source_image_res=cfg.dataset.source_image_res,
             normalize_camera=cfg.dataset.normalize_camera,
             normed_dist_to_center=cfg.dataset.normed_dist_to_center,
+            num_all_views=cfg.dataset.num_all_views,
         )
 
         # build data loader

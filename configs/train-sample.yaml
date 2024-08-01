@@ -28,6 +28,7 @@ dataset:
                 train: <TRAIN_UIDS_IN_JSON>
                 val: <VAL_UIDS_IN_JSON>
             sample_rate: 1.0
+    num_all_views: 32
     sample_side_views: 3
     source_image_res: 224
     render_image:

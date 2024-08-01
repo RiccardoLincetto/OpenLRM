@@ -51,8 +51,7 @@ Thumbs.db
 *.swo
 *.~*
 
+# Project-specific
 dumps/
 exps/
-pretrained/
-renders/
 wandb/
